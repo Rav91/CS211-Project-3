@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 public class HistogramAlphaBet {
     private HashMap<Character, Double> charMap;
@@ -64,7 +65,7 @@ public class HistogramAlphaBet {
         Collections.sort(mapValues);
         Collections.sort(mapKeys);
 
-        HashMap<Character, Double> sortedMap = new HashMap<>();
+        LinkedHashMap<Character, Double> sortedMap = new LinkedHashMap<>();
 
         Iterator<Double> valueIt = mapValues.iterator();
         while (valueIt.hasNext()) {
