@@ -1,8 +1,12 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
 public class HistogramAlphaBet {
     private HashMap<Character, Double> charMap;
@@ -53,4 +57,33 @@ public class HistogramAlphaBet {
             charMap.replace(entry.getKey(), (entry.getValue() / total));
         }
     }
+
+    public HashMap<Character, Double> sortHashMapByValues(HashMap<Character, Double> passedMap) {
+        List<Character> mapKeys = new ArrayList<>(passedMap.keySet());
+        List<Double> mapValues = new ArrayList<>(passedMap.values());
+        Collections.sort(mapValues);
+        Collections.sort(mapKeys);
+
+        HashMap<Character, Double> sortedMap = new HashMap<>();
+
+        Iterator<Double> valueIt = mapValues.iterator();
+        while (valueIt.hasNext()) {
+            Double val = valueIt.next();
+            Iterator<Character> keyIt = mapKeys.iterator();
+
+            while (keyIt.hasNext()) {
+                Character key = keyIt.next();
+                Double comp1 = passedMap.get(key);
+                Double comp2 = val;
+
+                if (comp1.equals(comp2)) {
+                    keyIt.remove();
+                    sortedMap.put(key, val);
+                    break;
+                }
+            }
+        }
+        return sortedMap;
+    }
+
 }

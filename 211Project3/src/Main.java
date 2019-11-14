@@ -1,22 +1,14 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Arrays;
 
 public class Main extends Application {
 
@@ -25,6 +17,7 @@ public class Main extends Application {
         File emma = new File("C:\\Users\\ravid\\Documents\\GitHub\\CS211-Project-3\\211Project3\\Emma.txt");
         HistogramAlphaBet emmaParse = new HistogramAlphaBet();
         emmaParse.mapFromFile(emma);
+        emmaParse.setCharMap(emmaParse.sortHashMapByValues(emmaParse.getCharMap()));
 
         primaryStage.setTitle("PieChart");
         Canvas canvas = new Canvas(900, 600);
