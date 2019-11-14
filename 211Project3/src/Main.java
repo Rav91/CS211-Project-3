@@ -22,6 +22,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        File emma = new File("C:\\Users\\ravid\\Documents\\GitHub\\CS211-Project-3\\211Project3\\Emma.txt");
+        HistogramAlphaBet emmaParse = new HistogramAlphaBet();
+        emmaParse.mapFromFile(emma);
+
         primaryStage.setTitle("PieChart");
         Canvas canvas = new Canvas(900, 600);
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -29,20 +33,15 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
-        Label text = new Label("Enter the number of characters to be displayed on the pie chart");
-        TextField inputBar = new TextField("");
+        TextField inputBar = new TextField("Enter the number of characters to be displayed on the pie chart");
         Button button = new Button("Submit");
-        inputBar.setMaxWidth(100);
-        root.setAlignment(text, Pos.TOP_LEFT);
-        root.setAlignment(inputBar, );
-        root.setTop(text);
-        root.setLeft(inputBar);
+        root.setTop(inputBar);
         root.setLeft(button);
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
+                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
                 int numToShow = Integer.parseInt(inputBar.getText());
-                HistogramAlphaBet frequency = new HistogramAlphaBet();
-                PieChart chart = new PieChart(canvas.getWidth()/2, canvas.getHeight()/2, canvas.getHeight(), canvas.getWidth(), frequency);
+                PieChart chart = new PieChart(canvas.getWidth()/2, canvas.getHeight()/2, canvas.getHeight(), canvas.getWidth(), emmaParse);
                 chart.draw(gc, numToShow);
             }
         };
@@ -50,11 +49,5 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) throws FileNotFoundException {
-        launch(args);
-        File emma = new File("C:\\Users\\ravid\\Documents\\GitHub\\CS211-Project-3\\211Project3\\Emma.txt");
-        HistogramAlphaBet emmaParse = new HistogramAlphaBet();
-        emmaParse.mapFromFile(emma);
-        System.out.println(Arrays.asList(emmaParse.getCharMap()));
-    }
+    public static void main(String[] args) { launch(args); }
 }
